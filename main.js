@@ -22,7 +22,7 @@ const addToFav = function (city) {
 
 const renderWeather = function (weather) {
   const mainContainer = document.createElement("div");
-  mainContainer.id = "mainContainer";
+  mainContainer.id = "weatherCard";
   const temp = document.createElement("div");
   temp.id = "temp";
   temp.innerText = `${weather.temprature}`;

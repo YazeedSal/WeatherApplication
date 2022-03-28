@@ -1,11 +1,21 @@
+body {
+  background-color: rgb(53, 53, 53);
+}
+#searchContainer{
+  background-color: blueviolet;
+  display: grid;
+  grid-template-rows: 1fr;
+  align-items: center;
+  justify-content: center;
+}
 #searchBtn {
   width: 70px;
   background-color: greenyellow;
   cursor: pointer;
 }
 
-#mainContainer {
+#weatherCard {
   height: 200px;
   width: 200px;
-  background-color: blueviolet;
+  background-color: rgb(25, 170, 228);
 }
