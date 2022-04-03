@@ -7,8 +7,10 @@ const getWeather = async function (city) {
     const weather = await $.get(
       `https://rami-weather.herokuapp.com/weather/${city}`
     );
+
     return weather;
   } catch (error) {
+    console.log("test if the catch is being entered"); //  the catch in not being entered for some reason
     alert("Please enter a valid country");
   }
 };
@@ -35,17 +37,20 @@ const renderWeather = function (weather) {
   const cityName = document.createElement("div");
   cityName.id = "cityName";
   cityName.innerText = `${weather.name}`;
+  const actionContainer = document.createElement("div");
+  actionContainer.id = "actionContainer";
   const favBtn = document.createElement("button");
   favBtn.innerText = "add";
   favBtn.addEventListener("click", function () {
     addToFav(weather.name);
   });
+  actionContainer.append(favBtn);
   mainContainer.append(
     temp,
     weatherStatusImg,
     weatherCondition,
     cityName,
-    favBtn
+    actionContainer
   );
   const favCities = getFavCities();
   for (let i = 0; favCities[i]; i++) {
@@ -53,12 +58,13 @@ const renderWeather = function (weather) {
       const delBtn = document.createElement("button");
       delBtn.innerText = "delete";
       delBtn.addEventListener("click", function () {
-        favCities.splice(i)
-        localStorage.setItem("favCities", JSON.stringify(favCities))
-        weatherContainer.innerHTML = ''
-        loadFavCities()
+        favCities.splice(i);
+        localStorage.setItem("favCities", JSON.stringify(favCities));
+        //weatherContainer.innerHTML = ''
+        //loadFavCities()
       });
-      mainContainer.append(delBtn);
+      actionContainer.innerHTML = "";
+      actionContainer.append(delBtn);
     }
   }
 
@@ -75,7 +81,13 @@ btn.addEventListener("click", async function () {
   const city = input.value;
   const weather = await getWeather(city);
   input.value = "";
-  renderWeather(weather);
+  console.log(weather);
+  if (weather.err) {
+    console.log("this means that the error is being seen");
+    alert("Please enter a valid country bro");
+  } else {
+    renderWeather(weather);
+  }
 });
 
 loadFavCities();

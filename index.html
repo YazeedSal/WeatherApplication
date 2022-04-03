@@ -11,8 +11,11 @@
 
   <body>
     <div id="searchContainer">
-      <input type="text" id="input" />
-      <button id="searchBtn">Search</button>
+      <form onsubmit="event.preventDefault();" role="search">
+        <label for="search">Search for stuff</label>
+        <input id="input" type="search" placeholder="Search..." autofocus required />
+        <button type="submit" id="searchBtn">Go</button>    
+      </form>
     </div>
     <div id="weatherContainer"></div>
     <script src="./main.js"></script>
